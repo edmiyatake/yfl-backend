@@ -2,9 +2,9 @@ spring:
   application:
     name: yfl-backend
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:yfl}
-    username: ${DB_USER:yfl_user}
-    password: ${DB_PASSWORD:yfl_local_password}
+    url: jdbc:postgresql://127.0.0.1:5432/yfl
+    username: yfl_user
+    password: yfl_local_password
   jpa:
     hibernate:
       ddl-auto: validate

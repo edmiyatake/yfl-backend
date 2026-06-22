@@ -1,6 +1,7 @@
 services:
-  postgres:
+  db:
     image: postgres:16
+    container_name: yfl_db
     environment:
       POSTGRES_DB: yfl
       POSTGRES_USER: yfl_user
@@ -8,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - yfl_postgres_data:/var/lib/postgresql/data
+      - yfl_db_data:/var/lib/postgresql/data
 
 volumes:
-  yfl_postgres_data:
+  yfl_db_data:
