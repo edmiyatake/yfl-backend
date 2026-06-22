@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: yfl-backend
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/yfl
+    username: yfl_user
+    password: yfl_local_password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+
+server:
+  port: 8080
