@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: yfl
+      POSTGRES_USER: yfl_user
+      POSTGRES_PASSWORD: yfl_local_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - yfl_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  yfl_postgres_data:
