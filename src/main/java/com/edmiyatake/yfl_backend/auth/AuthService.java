@@ -1,4 +1,4 @@
-package com.yfl_backend.auth;
+package com.edmiyatake.yfl_backend.auth;
 
 import org.springframework.stereotype.Service;
 

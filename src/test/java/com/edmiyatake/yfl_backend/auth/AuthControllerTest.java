@@ -3,11 +3,11 @@ package com.edmiyatake.yfl_backend.auth;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AutoConfigureTestRestTemplate
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional
 public class AuthControllerTest {
 
     @Autowired
@@ -38,10 +39,10 @@ public class AuthControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        // did the endpoint respond?
-        LoginCode saved = loginCodeRepository.findByEmail("edwin@example.com").orElseThrow();
+        LoginCode saved = loginCodeRepository
+                .findFirstByEmailOrderByCreatedAtDesc("edwin@example.com")
+                .orElseThrow();
 
-        // did the user get a code thats 6 digits and does it have an expiration date
         assertEquals(6, saved.getCode().length());
         assertTrue(saved.getExpiresAt().isAfter(Instant.now()));
     }

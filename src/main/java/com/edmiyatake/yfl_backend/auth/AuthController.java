@@ -1,4 +1,4 @@
-package com.yfl_backend.auth;
+package com.edmiyatake.yfl_backend.auth;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
