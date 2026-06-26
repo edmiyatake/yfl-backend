@@ -46,4 +46,27 @@ public class AuthControllerTest {
         assertEquals(6, saved.getCode().length());
         assertTrue(saved.getExpiresAt().isAfter(Instant.now()));
     }
+
+    /*
+    Test for Step 2 of Authentication
+    --> When a code has expired, verify-code should reject it and not issue a token
+ */
+    @Test
+    void verifyCode_rejectsExpiredCode() {
+        LoginCode expiredCode = new LoginCode();
+        expiredCode.setEmail("edwin@example.com");
+        expiredCode.setCode("123456");
+        expiredCode.setExpiresAt(Instant.now().minusSeconds(60));
+        expiredCode.setCreatedAt(Instant.now().minusSeconds(120));
+        expiredCode.setAttempts(0);
+        loginCodeRepository.save(expiredCode);
+
+        ResponseEntity<?> response = restTemplate.postForEntity(
+                "/api/v1/auth/verify-code",
+                new VerifyCodeDto("edwin@example.com", "123456"),
+                Void.class
+        );
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
 }
