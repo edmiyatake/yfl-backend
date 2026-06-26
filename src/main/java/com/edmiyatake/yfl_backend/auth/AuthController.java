@@ -18,4 +18,10 @@ public class AuthController {
         authService.requestCode(request.getEmail());
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/verify-code")
+    public ResponseEntity<Void> verifyCode(@RequestBody VerifyCodeDto request) {
+        authService.verifyCode(request.getEmail(), request.getCode());
+        return ResponseEntity.ok().build();
+    }
 }
