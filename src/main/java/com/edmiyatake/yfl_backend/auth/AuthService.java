@@ -1,6 +1,8 @@
 package com.edmiyatake.yfl_backend.auth;
 
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
 import java.time.Instant;
@@ -27,6 +29,16 @@ public class AuthService {
         loginCode.setCreatedAt(Instant.now());
 
         loginCodeRepository.save(loginCode);
+    }
+
+    public void verifyCode(String email, String code) {
+        LoginCode loginCode = loginCodeRepository
+                .findFirstByEmailOrderByCreatedAtDesc(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid code"));
+
+        if (loginCode.getExpiresAt().isBefore(Instant.now())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Code expired");
+        }
     }
 
     private String generateCode() {
