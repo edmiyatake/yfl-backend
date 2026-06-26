@@ -1,5 +1,6 @@
 package com.edmiyatake.yfl_backend.auth;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AutoConfigureTestRestTemplate
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional
 public class AuthControllerTest {
 
     @Autowired
@@ -24,6 +23,11 @@ public class AuthControllerTest {
 
     @Autowired
     private LoginCodeRepository loginCodeRepository;
+
+    @BeforeEach
+    void cleanDatabase() {
+        loginCodeRepository.deleteAll();
+    }
 
     /*
         Test for Step 1 of Authentication
@@ -48,9 +52,9 @@ public class AuthControllerTest {
     }
 
     /*
-    Test for Step 2 of Authentication
-    --> When a code has expired, verify-code should reject it and not issue a token
- */
+        Test for Step 2 of Authentication
+        --> When a code has expired, verify-code should reject it and not issue a token
+     */
     @Test
     void verifyCode_rejectsExpiredCode() {
         LoginCode expiredCode = new LoginCode();
