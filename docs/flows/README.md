@@ -58,7 +58,7 @@ Designed a passwordless OTP auth flow that handles email validation, code expiry
 > Uses a silent 200 response on unrecognized emails to prevent user enumeration.
 
 ### Student Onboarding
-![Student Onboarding](docs/flows/student-onboarding-flow.png)
+![Student Onboarding](docs/flows/yfl_student_onboarding.png)
 
 > Students join teams via an alphanumeric season-scoped code, similar to Jackbox.
 
