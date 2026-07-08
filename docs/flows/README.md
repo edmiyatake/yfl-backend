@@ -53,12 +53,12 @@ API runs at `http://localhost:8080`
 ### Authentication
 Designed a passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, TAs, and professors each land in the right place after login
 
-![Auth Flow](docs/flows/yfl_auth_flow.png)
+![Auth Flow](yfl_auth_flow.png)
 
 > Uses a silent 200 response on unrecognized emails to prevent user enumeration.
 
 ### Student Onboarding
-![Student Onboarding](docs/flows/yfl_student_onboarding.png)
+![Student Onboarding](yfl_student_onboarding.png)
 
 > Students join teams via an alphanumeric season-scoped code, similar to Jackbox.
 
