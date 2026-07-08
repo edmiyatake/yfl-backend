@@ -1,8 +1,9 @@
-# ŷFL - Financial Forecasting League
+# ŷFL - Financial Forecasting League (System Design)
 
-A competitive financial forecasting platform built for Professor Savlowitz and Competitive Analytics. Students predict real-world financial events, manage a virtual portfolio, and compete on a live leaderboard across an academic season.
+A competitive financial forecasting platform built for Professor Savlowitz and Competitive Analytics. 
+Students predict real-world financial events, manage a virtual portfolio, and compete on a live leaderboard across an academic season.
 
-Built as a production-grade web platform to replace a manual Excel/Alteryx/Google Drive workflow.
+The goal is to build a production-grade web platform to replace the original system which was a manual Excel/Alteryx/Google Drive workflow.
 
 ---
 
@@ -51,7 +52,8 @@ API runs at `http://localhost:8080`
 ## User Flows
 
 ### Authentication
-Designed a passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, TAs, and professors each land in the right place after login
+Designed a passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, 
+TAs, and professors each land in the right place after login.
 
 ![Auth Flow](yfl_auth_flow.png)
 
@@ -97,5 +99,4 @@ See `/docs/adr/` for Architecture Decision Records covering key decisions made d
 
 ## Author
 
-Edwin Miyatake
-Built in partnership with Competitive Analytics and Professor Savlowitz.
+This is version 2. Version 1 was created as part of an University of California, Irvine masters capstone project where I worked with Professor Savlowitz.
