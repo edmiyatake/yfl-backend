@@ -18,7 +18,7 @@ Built as a production-grade web platform to replace a manual Excel/Alteryx/Googl
 
 ---
 
-## Running Locallydxafd
+## Running Locally
 
 ### Prerequisites
 - Java 21
