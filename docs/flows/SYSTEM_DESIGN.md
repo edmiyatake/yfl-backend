@@ -13,13 +13,13 @@ Build a production-grade web platform to replace the original system which was a
 
 ## Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Java 21, Spring Boot 4.1.0 |
-| Database | PostgreSQL 16 (Docker) |
-| Migrations | Flyway |
-| Frontend | Next.js (App Router), TypeScript, Tailwind CSS |
-| Auth | Passwordless OTP + JWT |
+| Layer      | Technology                                     |
+|------------|------------------------------------------------|
+| Backend    | Java 21, Spring Boot 4.1.0                     |
+| Database   | PostgreSQL 16 (Docker)                         |
+| Migrations | Flyway                                         |
+| Frontend   | Next.js (App Router), TypeScript, Tailwind CSS |
+| Auth       | Passwordless OTP + JWT                         |
 
 Java is a well-established choice for financial systems, with strong type safety and mature transaction handling. Spring Boot builds on this foundation and accelerates development with its annotation-driven approach to transactions, validation, and dependency injection.
 
@@ -77,12 +77,14 @@ TAs, and professors each land in the right place after login.
 > Students join teams via an alphanumeric season-scoped code, similar to Jackbox.
 
 ### Student Game Loop
-![Student Game Loop](docs/flows/student-game-loop-flow.png)
+
+[//]: # (![Student Game Loop]&#40;student-game-loop-flow.png&#41;)
 
 > Predictions are locked at question close time and cannot be edited after submission.
 
 ### Prediction Submission
-![Prediction Submission](docs/flows/student-prediction-submission-flow.png)
+
+[//]: # (![Prediction Submission]&#40;docs/flows/student-prediction-submission-flow.png&#41;)
 
 > Supports binary (Yes/No) and continuous (numeric) question types with investment and confidence inputs.
 
@@ -96,19 +98,19 @@ See `/docs/adr/` for Architecture Decision Records covering key decisions made d
 
 ## Project Status
 
-| Phase | Description | Status |
-|---|---|---|
-| 0 | Scaffolding and environment | Done |
-| 1 | Auth and roles | In Progress |
-| 2 | Seasons and teams | Not Started |
-| 3 | Forecast questions and predictions | Not Started |
-| 4 | Scoring and leaderboard | Not Started |
-| 5 | Hardening and performance | Not Started |
-| 6 | API docs and frontend integration | Not Started |
-| 7 | Polish and portfolio pass | Not Started |
+| Phase | Description                        | Status      |
+|-------|------------------------------------|-------------|
+| 0     | Scaffolding and environment        | Done        |
+| 1     | Auth and roles                     | In Progress |
+| 2     | Seasons and teams                  | Not Started |
+| 3     | Forecast questions and predictions | Not Started |
+| 4     | Scoring and leaderboard            | Not Started |
+| 5     | Hardening and performance          | Not Started |
+| 6     | API docs and frontend integration  | Not Started |
+| 7     | Polish and portfolio pass          | Not Started |
 
 ---
 
 ## Author
 
-This is version 2. Version 1 was created as part of an University of California, Irvine masters capstone project where I worked with Professor Savlowitz.
+This is version 2. Version 1 was created as part of a University of California, Irvine masters capstone project where I worked with Professor Savlowitz.
