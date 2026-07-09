@@ -1,9 +1,13 @@
 # ŷFL - Financial Forecasting League (System Design)
 
-A competitive financial forecasting platform built for Professor Savlowitz and Competitive Analytics. 
-Students predict real-world financial events, manage a virtual portfolio, and compete on a live leaderboard across an academic season.
+This is the second iteration of a project originally started at the University of California, Irvine. As part of a capstone course, our team worked with Professor Savlowitz to build a competitive financial forecasting platform. We shipped a working beta, but it remained incomplete when the group disbanded.
 
-The goal is to build a production-grade web platform to replace the original system which was a manual Excel/Alteryx/Google Drive workflow.
+In hindsight, I believe that our biggest shortfall was systems design. We spent too little time documenting features and requirements, and design decisions made in team discussions were rarely recorded, which made the codebase harder to reason about and maintain as it grew.
+
+This rewrite is an effort to correct that. I'm dedicating significantly more time to the design process before writing code. This document captures the design decisions I'm making and the reasoning behind them.
+
+## The Goal
+Build a production-grade web platform to replace the original system which was a manual Excel/Alteryx/Google Drive workflow.
 
 ---
 
@@ -16,6 +20,14 @@ The goal is to build a production-grade web platform to replace the original sys
 | Migrations | Flyway |
 | Frontend | Next.js (App Router), TypeScript, Tailwind CSS |
 | Auth | Passwordless OTP + JWT |
+
+Java is a well-established choice for financial systems, with strong type safety and mature transaction handling. Spring Boot builds on this foundation and accelerates development with its annotation-driven approach to transactions, validation, and dependency injection.
+
+The entire project is containerized with Docker for consistent, easy deployment. Flyway manages database schema migrations, keeping schema changes version-controlled and well-documented over time.
+
+The previous version used Next.js for both frontend and backend. For this iteration, I chose a Spring Boot backend paired with a lightweight Vite/React frontend, a separation that better fits the strengths of each layer and keeps the codebase easier to reason about.
+
+One feature the professor specifically liked was passwordless login: a generated code is emailed to the user, which redirects them to the home page upon verification.
 
 ---
 
