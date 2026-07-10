@@ -6,10 +6,18 @@ In hindsight, I believe that our biggest shortfall was systems design. We spent 
 
 This rewrite is an effort to correct that. I'm dedicating significantly more time to the design process before writing code. This document captures the design decisions I'm making and the reasoning behind them.
 
-## The Goal
-Build a production-grade web platform to replace the original system which was a manual Excel/Alteryx/Google Drive workflow.
+## The Problem
+The motivation for transforming the original system into a full-stack web application is plentiful. First, creating an
+instance of a season of forecasts is extremely time-consuming. You have to create a new excel sheet to hold unique data,
+multiple queries to access specific data, and it's easy to manipulate the data from a cynical perspective.
 
----
+## The Fix
+Build a production-grade web platform to replace the original system which was a manual Excel/Alteryx/Google Drive 
+workflow. A web platform reduces the time to create a season populated with students from an hour to a couple minutes.
+We now have the ability to add role based access controls to a system which introduces a plethora of benefits. Data is 
+persistent and can only be access by a specific role. The super admin view can see different seasons and user 
+statistics on a single page. Teaching assistants or admins can be assigned to specific seasons to reduce the work of
+the super admin.
 
 ## Stack
 
@@ -29,43 +37,21 @@ The previous version used Next.js for both frontend and backend. For this iterat
 
 One feature the professor specifically liked was passwordless login: a generated code is emailed to the user, which redirects them to the home page upon verification.
 
----
+## Design
 
-## Running Locally
-
-### Prerequisites
-- Java 21
-- Docker Desktop
-- Node.js 18+
-
-### Backend
-
-```bash
-# Start the database
-docker compose up -d
-
-# Run the backend
-./mvnw spring-boot:run
-```
-
-### Frontend
-
-```bash
-cd yfl-frontend
-npm install
-npm run dev
-```
-
-App runs at `http://localhost:3000`
-API runs at `http://localhost:8080`
-
----
+A concept I learned through my internships and classes is to write everything out on pen and paper and save it. As a
+team, we remembered certain design decisions differently, and we had no way to remember. 
 
 ## User Flows
 
-### Authentication
-Designed a passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, 
-TAs, and professors each land in the right place after login.
+Requirement drift was constantly appearing so I decided to make flow diagrams for each role. The goal of this is to
+understand what each role can do and see what pages / views are necessary for the frontend. 
+
+### Authentication and Authorization
+As a group, we discussed multiple forms of authentications. The professor favored passwordless log in because users 
+don't need to remember any passwords. I want to respect that decision and create a flow around it. I designed a 
+passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, 
+TAs, and professors each land in the right place after login with ease.
 
 ![Auth Flow](yfl_auth_flow.png)
 
