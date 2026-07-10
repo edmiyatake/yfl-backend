@@ -49,9 +49,10 @@ understand what each role can do and see what pages / views are necessary for th
 
 ### Authentication and Authorization
 As a group, we discussed multiple forms of authentications. The professor favored passwordless log in because users 
-don't need to remember any passwords. I want to respect that decision and create a flow around it. I designed a 
-passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so students, 
-TAs, and professors each land in the right place after login with ease.
+don't need to remember any passwords. Instead of account creation, the professor wanted to be able to upload lists
+of user emails (like a list from Canvas) for each season. I want to respect that decision and create a flow around it. 
+I designed a passwordless OTP auth flow that handles email validation, code expiry, and role-based redirects so 
+students, TAs, and professors each land in the right place after login with ease.
 
 ![Auth Flow](yfl_auth_flow.png)
 
