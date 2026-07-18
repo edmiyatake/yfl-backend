@@ -1,5 +1,6 @@
 # Component: ForecastQuestion
-Scope: Question creation, lifecycle, lock-time enforcement, resolution (marking the outcome, not scoring, that's the Scoring component's job). Season-scoped, following the same TA/Professor permission pattern as Season and Team.
+This sectio  covers how to create a forecast, lock-time enforcement, resolution. Season-scoped, following the same 
+TA/Professor permission pattern as Season and Team.
 
 ## User Story 1: Create a forecast question
 As a TA or Professor, I want to create either a binary or continuous forecast question, so that students can predict yes/no outcomes or exact numeric values.
