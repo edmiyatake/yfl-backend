@@ -98,6 +98,17 @@ Acceptance Criteria:
 - Given a Student attempting to view a season's roster, then the request is rejected with 403, this is a Staff-only view 
 for now, revisit if students should see who else is enrolled.
 
+## User Story 8: Prevent activating a season with incomplete configuration
+As the system, I want to block a season from becoming ACTIVE if its financial configuration is incomplete, so that Prediction never encounters the null-config edge case it currently has to guard against defensively.
+
+Acceptance Criteria:
+
+- Given a season in DRAFT with any of startingBalance, minInvestment, maxInvestment, maxDebt, or interestRate unset,
+when a Professor attempts to transition it to ACTIVE, then the request is rejected with 400 naming which fields are missing.
+- Create a default setting!
+- Given a season with all financial config fields set (whether by explicit input or by the defaults from Story 1), 
+the ACTIVE transition proceeds normally.
+
 
 ## Definition of Done for Season
 
