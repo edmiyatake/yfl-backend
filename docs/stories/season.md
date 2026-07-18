@@ -1,5 +1,6 @@
 # Component: Season
-Scope: Season CRUD, lifecycle state transitions, TA assignment, student enrollment, roster visibility.
+This will cover how seasons work in the game. The original system was one school quarter or 8 weeks. I will also explicitly
+determine how Season CRUD, lifecycle state transitions, TA assignment, student enrollment, roster visibility are handled.
 
 ## User Story 1: Create a season
 As a Professor, I want to create a new season, so that a new competition cycle can begin.
@@ -33,11 +34,8 @@ Acceptance Criteria:
 to enrolled students and its assigned TA.
 - Given a season in ACTIVE, when a Professor transitions it to CLOSED, then the status updates and no further predictions,
 team changes, or enrollments are accepted for that season.
-- Given a season in DRAFT, when a Professor attempts to transition it directly to CLOSED, decide explicitly whether 
-skipping ACTIVE is allowed (probably yes, a season can be cancelled before it starts) versus requiring the linear path. I'd 
-allow DRAFT → CLOSED directly as a cancellation path, but block CLOSED → anything.
+- Given a season in DRAFT, a Professor can transition it directly to CLOSED.
 - Given a CLOSED season, when any transition is attempted, then it is rejected with 400, closed is terminal.
-
 
 ## User Story 4: Assign a TA to a season
 As a Professor, I want to assign a TA to a specific season, so that they can help manage it.
@@ -49,28 +47,26 @@ management purposes.
 - Given a user who is not role TA, when a Professor attempts to assign them as a season's TA, then the request is rejected 
 with 400, promotion to TA (Role Management component) is a separate, prior step.
 - Given a TA already assigned to a different season, when a Professor attempts to assign them to a second season, then 
-decide explicitly: reject the request, or reassign and drop the prior season. Given the "TA is only assigned to one season" 
-rule, I'd reject with a clear error rather than silently reassigning, so a Professor doesn't accidentally orphan a season's 
+reject with a clear error rather than silently reassigning, so a Professor doesn't accidentally orphan a season's 
 TA coverage.
 - Given a Student or TA attempting to assign a TA to a season, then the request is rejected with 403, this is Professor-only.
-
 
 ## User Story 5: Enroll a student in a season
 As a Student, I want to join an open season, so that I can participate in that season's predictions.
 
 Acceptance Criteria:
 
-- Given a season in DRAFT or ACTIVE status open for enrollment, when a Student joins, then they are enrolled and their 
-membership is persisted.
-- Given a Student already enrolled in another active season, when they attempt to join a second one, then the request is 
-rejected, enforcing the one-active-season-at-a-time rule. Decide whether this is a hard block or whether joining a new 
-season automatically ends membership in the old one, I'd make it a hard block with a clear error telling them to leave 
-their current season first, automatic silent removal from a season is the kind of thing that causes support tickets and 
-disputes over lost progress.
-- Given a season in CLOSED status, when a Student attempts to join, then the request is rejected with 400.
-- Given a Student attempting to enroll another user in a season, then the request is rejected, students can only enroll 
-themselves.
-
+- Given a season, then it has a joinCode (short random string) and an allowedDomains list set at creation by the Professor.
+- Given a student submitting a valid join code, when their email domain matches one of the season's allowedDomains, 
+then they are enrolled.
+- Given a valid join code but an email domain that does not match, then the request is rejected with 403, with a message 
+that doesn't leak which domains are valid, just that this account isn't eligible.
+- Given a season with an additional exact-email allowlist configured, when present, then a matching email must also appear 
+on that list, domain match alone is insufficient for that season.
+- Given an invalid or expired join code, then the request is rejected with 404 or 400 rather than 403, so "wrong code" and 
+"wrong organization" are distinguishable failure states for support purposes, even though the student-facing message can 
+stay generic.
+- Given the one-active-season-at-a-time rule already established, this still applies on top of the above.
 
 ## User Story 6: List and view seasons
 As a user, I want to see the seasons relevant to me, so that I know what's active and what I'm part of.
@@ -83,7 +79,6 @@ Acceptance Criteria:
 in (if any) are returned, not every season in the system.
 - Given any authenticated user, when they fetch a single season by ID, then the response is scoped by the same visibility 
 rules as the list endpoint, a TA can't fetch a season they're not assigned to just by guessing its ID.
-
 
 ## User Story 7: View season roster
 As a TA or Professor, I want to see who is enrolled in a season, so that I can track participation without a spreadsheet.
