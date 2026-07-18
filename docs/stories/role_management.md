@@ -1,5 +1,5 @@
 # Component: User/Role Management
-Scope: User record lifecycle, role assignment and promotion, profile management. Builds directly on Auth, every story here assumes a valid authenticated caller.
+This section covers how the user will interact with the system and how role / profile management will be executed. .
 
 ## User Story 1: Auto-provision a user record on first login
 As a new user, I want an account to be created automatically the first time I verify my login code, so that I don't need a 
@@ -13,6 +13,9 @@ User record is created with role STUDENT by default.
 existing user's role is unchanged.
 - Given a newly created user, then their record includes email and creation timestamp at minimum, with name and other profile 
 fields left null until the user fills them in.
+- Given account creation itself is intentionally organization-agnostic, then no domain or allowlist check happens here;
+that restriction is enforced at season enrollment, not at account creation. An account with no season membership has 
+no meaningful access to anything.
 
 
 ## User Story 2: Bootstrap the first Staff account
@@ -39,9 +42,7 @@ Acceptance Criteria:
 then the role is updated and persisted.
 - Given a Student attempting to call the promote endpoint, then the request is rejected with 403, regardless of what role 
 they're trying to assign, including to themselves.
-- Given a Staff member attempting to promote themselves, then decide explicitly whether this is allowed (a Professor 
-promoting another account to Professor is legitimate; a TA promoting themselves to Professor probably shouldn't be, worth a 
-rule here rather than leaving it open).
+- Self Promotion is not allowed
 - Given a role change, then it's recorded in an audit log with who made the change, to whom, and when, since this is a 
 sensitive action.
 
