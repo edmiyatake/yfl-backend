@@ -10,6 +10,13 @@ Acceptance Criteria:
 - Given a Professor, when they create a season with a name and start/end dates, then it is persisted with status DRAFT.
 - Given a TA or Student attempting to create a season, then the request is rejected with 403.
 - Given a season creation request missing required fields (name, start date), then it is rejected with 400.
+- Given a season creation request, then it accepts and persists startingBalance, minInvestment, maxInvestment, maxDebt, 
+interestRate, and improvementWindow, defaulting to the values from the original YFL materials ($1B, $1M, $20M, $10M, 10%, 10)
+when the Professor doesn't override them.
+- Given a season creation request, then joinCode is generated automatically (not supplied by the Professor) and 
+allowedDomains is accepted as an optional list, empty means no domain restriction, an open/public season.
+- Given financial config values, then minInvestment must be less than maxInvestment, and both must be positive, 
+rejected with 400 otherwise, this is the same validation discipline you're already applying to lock times in ForecastQuestion.
 
 
 ## User Story 2: Edit season metadata
