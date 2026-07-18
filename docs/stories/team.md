@@ -1,6 +1,7 @@
 # Component: Team
-Scope: Team creation, membership, roster visibility, staff oversight. All team actions are scoped within a season, since a
-team only exists inside one season's context.
+Originally, this was not in scope but since I have time, I have decided to implement. This section covers Team creation, 
+membership, roster visibility, staff oversight. All team actions are scoped within a season, since a team only exists 
+inside one season's context.
 
 ## User Story 1: Create a team
 As a Student, I want to create a team within my enrolled season, so that I can compete alongside teammates.
